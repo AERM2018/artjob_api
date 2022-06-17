@@ -1,0 +1,14 @@
+{
+  "name": "artjob_api",
+  "version": "1.0.0",
+  "description": "Api for art job finder in Paris",
+  "main": "index.js",
+  "author": "AERM2018 <retana.martinez.angel.eduardo@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "curl": "^0.1.4",
+    "express": "^4.18.1",
+    "sequelize": "^6.21.0"
+  }
+}
