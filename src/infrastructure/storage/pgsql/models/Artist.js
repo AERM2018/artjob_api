@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Artist',
+    tableName: 'artists',
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   });
   return Artist;
 };

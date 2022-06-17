@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Portafolio',
+    table: 'portafolios',
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   });
   return Portafolio;
 };

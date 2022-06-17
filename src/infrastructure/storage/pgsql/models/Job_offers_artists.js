@@ -21,6 +21,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Job_offers_artists',
+    tableName: 'job_offers_artists',
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   });
   return Job_offers_artists;
 };
