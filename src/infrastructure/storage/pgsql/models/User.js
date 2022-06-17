@@ -1,4 +1,5 @@
 'use strict';
+const bcrypt = require('bcrypt');
 const {
   Model
 } = require('sequelize');
@@ -20,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
+    id: { type: DataTypes.UUID, primaryKey: true, defaultValue: sequelize.literal('uuid_generate_v4()') },
     email: DataTypes.STRING,
     description: DataTypes.STRING,
     rate: DataTypes.DOUBLE,
@@ -33,5 +35,11 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
   });
+
+  User.beforeCreate((user, options) => {
+    const salt = bcrypt.genSaltSync()
+    const hashedPassword = bcrypt.hashSync(user.password, salt)
+    user.password = hashedPassword;
+  })
   return User;
 };
