@@ -1,0 +1,7 @@
+const path = require('path');
+module.exports = {
+    config: path.resolve(process.cwd(), 'src', 'infrastructure', 'storage', 'pgsql', 'config', 'config.js'),
+    'models-path': path.resolve(process.cwd(), 'src', 'infrastructure', 'storage', 'pgsql', 'models'),
+    'migrations-path': path.resolve(process.cwd(), 'src', 'infrastructure', 'storage', 'pgsql', 'migrations'),
+    'seeders-path': path.resolve(process.cwd(), 'src', 'infrastructure', 'storage', 'pgsql', 'seeders'),
+};
