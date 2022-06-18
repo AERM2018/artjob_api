@@ -9,10 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: 'user_id' });
+      this.belongsTo(models.Portafolio, { foreignKey: 'portafolio_id' });
     }
   }
   Artist.init(
     {
+      id: { type: DataTypes.UUID, primaryKey: true, defaultValue: sequelize.literal('uuid_generate_v4()') },
       user_id: DataTypes.UUID,
       portafolio_id: DataTypes.UUID,
       experience: DataTypes.ENUM('titled', 'independent'),

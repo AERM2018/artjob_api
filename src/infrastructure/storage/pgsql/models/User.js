@@ -26,6 +26,7 @@ module.exports = (sequelize, DataTypes) => {
       phone_number: DataTypes.STRING,
       location: DataTypes.STRING,
       password: DataTypes.STRING,
+      type: DataTypes.ENUM('artist', 'comapny'),
     },
     {
       sequelize,

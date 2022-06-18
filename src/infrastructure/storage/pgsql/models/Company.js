@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Company.init(
     {
+      id: { type: DataTypes.UUID, primaryKey: true, defaultValue: sequelize.literal('uuid_generate_v4()') },
       user_id: DataTypes.UUID,
       address: DataTypes.STRING,
     },
