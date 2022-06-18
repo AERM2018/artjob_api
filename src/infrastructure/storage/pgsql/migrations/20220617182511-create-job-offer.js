@@ -6,37 +6,37 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        defaultValue: Sequelize.UUIDV4,
       },
       company_user_id: {
         type: Sequelize.UUID,
         references: {
           model: {
-            tableName: 'users'
+            tableName: 'users',
           },
-          key: 'id'
-        }
+          key: 'id',
+        },
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       revenue: {
-        type: Sequelize.DOUBLE
+        type: Sequelize.DOUBLE,
       },
       has_prospect_chosen: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       created_at: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updated_at: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('job_offers');
-  }
+  },
 };

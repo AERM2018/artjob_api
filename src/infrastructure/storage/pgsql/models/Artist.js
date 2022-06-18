@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Artist extends Model {
     /**
@@ -10,19 +8,22 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.User, { foreignKey: 'user_id' })
+      this.belongsTo(models.User, { foreignKey: 'user_id' });
     }
   }
-  Artist.init({
-    user_id: DataTypes.UUID,
-    portafolio_id: DataTypes.UUID,
-    experience: DataTypes.ENUM('titled', 'independent')
-  }, {
-    sequelize,
-    modelName: 'Artist',
-    tableName: 'artists',
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  });
+  Artist.init(
+    {
+      user_id: DataTypes.UUID,
+      portafolio_id: DataTypes.UUID,
+      experience: DataTypes.ENUM('titled', 'independent'),
+    },
+    {
+      sequelize,
+      modelName: 'Artist',
+      tableName: 'artists',
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+    },
+  );
   return Artist;
 };

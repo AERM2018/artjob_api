@@ -6,40 +6,40 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        defaultValue: Sequelize.UUIDV4,
       },
       artist_user_id: {
         type: Sequelize.UUID,
         references: {
           model: {
-            tableName: 'users'
+            tableName: 'users',
           },
-          key: 'id'
-        }
+          key: 'id',
+        },
       },
       job_offer_id: {
         type: Sequelize.UUID,
         references: {
           model: {
-            tableName: 'job_offers'
+            tableName: 'job_offers',
           },
-          key: 'id'
-        }
+          key: 'id',
+        },
       },
       is_hired: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
       },
       created_at: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updated_at: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('job_offers_artists');
-  }
+  },
 };

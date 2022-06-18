@@ -6,40 +6,40 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.UUIDV4
+        defaultValue: Sequelize.UUIDV4,
       },
       user_id: {
         type: Sequelize.UUID,
         references: {
           model: {
-            tableName: 'users'
+            tableName: 'users',
           },
-          key: 'id'
-        }
+          key: 'id',
+        },
       },
       portafolio_id: {
         type: Sequelize.UUID,
         references: {
           model: {
-            tableName: 'portafolios'
+            tableName: 'portafolios',
           },
-          key: 'id'
-        }
+          key: 'id',
+        },
       },
       experience: {
-        type: Sequelize.ENUM('titled', 'independent')
+        type: Sequelize.ENUM('titled', 'independent'),
       },
       created_at: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updated_at: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
     await queryInterface.dropTable('artists');
-  }
+  },
 };

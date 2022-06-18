@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Job_offers_artists extends Model {
     /**
@@ -10,20 +8,23 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.User, { foreignKey: 'artist_user_id' })
-      this.belongsTo(models.Job_offer, { foreignKey: 'job_offer_id' })
+      this.belongsTo(models.User, { foreignKey: 'artist_user_id' });
+      this.belongsTo(models.Job_offer, { foreignKey: 'job_offer_id' });
     }
   }
-  Job_offers_artists.init({
-    artist_user_id: DataTypes.UUID,
-    job_offer_id: DataTypes.UUID,
-    is_hired: DataTypes.BOOLEAN
-  }, {
-    sequelize,
-    modelName: 'Job_offers_artists',
-    tableName: 'job_offers_artists',
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
-  });
+  Job_offers_artists.init(
+    {
+      artist_user_id: DataTypes.UUID,
+      job_offer_id: DataTypes.UUID,
+      is_hired: DataTypes.BOOLEAN,
+    },
+    {
+      sequelize,
+      modelName: 'Job_offers_artists',
+      tableName: 'job_offers_artists',
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+    },
+  );
   return Job_offers_artists;
 };
