@@ -2,6 +2,9 @@ class UserRepository {
   async getUserByEmail(email) {
     throw Error('No implemented.');
   }
+  async getUserById(id) {
+    throw Error('No implemented.');
+  }
   async getArtists() {
     throw Error('No implemented.');
   }
