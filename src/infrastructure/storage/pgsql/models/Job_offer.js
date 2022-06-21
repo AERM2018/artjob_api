@@ -8,11 +8,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      this.belongsTo(models.User, { foreignKey: 'company_user_id' });
+      this.belongsTo(models.User, { foreignKey: 'company_user_id', as: 'company' });
     }
   }
   Job_offer.init(
     {
+      id: { type: DataTypes.UUID, primaryKey: true, defaultValue: sequelize.literal('uuid_generate_v4()') },
       company_user_id: DataTypes.UUID,
       description: DataTypes.STRING,
       revenue: DataTypes.DOUBLE,

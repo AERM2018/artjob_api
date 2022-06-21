@@ -14,9 +14,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   Job_offers_artists.init(
     {
+      id: { type: DataTypes.UUID, primaryKey: true, defaultValue: sequelize.literal('uuid_generate_v4()') },
       artist_user_id: DataTypes.UUID,
       job_offer_id: DataTypes.UUID,
-      is_hired: DataTypes.BOOLEAN,
+      is_hired: { type: DataTypes.BOOLEAN, defaultValue: false },
     },
     {
       sequelize,

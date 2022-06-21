@@ -4,6 +4,7 @@ const serializeUser = (user) => {
   return {
     id: user.toJSON().id,
     type: user.toJSON().type,
+    name: user.toJSON().name,
     email: user.toJSON().email,
     description: user.toJSON().description,
     rate: user.toJSON().rate,
@@ -17,6 +18,7 @@ const serializeUser = (user) => {
 };
 
 const serializeUserDetails = (details) => {
+  if (!details) return null;
   let portafolioDetails;
   if (details.portafolio) {
     portafolioDetails = {

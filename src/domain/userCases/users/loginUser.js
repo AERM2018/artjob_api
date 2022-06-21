@@ -10,6 +10,6 @@ module.exports = async (email, password, userDataSource) => {
   if (!bcrypt.compareSync(password, user.password)) {
     return { status: HttpStatus.NOT_FOUND, error: null, msg: `The credentials are wrong.` };
   }
-  const { password: userDbPassword, ...restUser } = user;
-  return { status: HttpStatus.OK, error: null, data: { user: restUser, token: generateJwt(user) } };
+  const { password: passwordDB, created_at, updated_at, rate, description, ...restUser } = user;
+  return { status: HttpStatus.OK, error: null, data: { user: restUser, token: generateJwt(restUser) } };
 };
