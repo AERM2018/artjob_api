@@ -11,6 +11,9 @@ class JobOfferRepository {
   async addProspectToJobOffer(artistUserId, jobOfferId) {
     throw Error('No implemented.');
   }
+  async showProspectsFromJobOffer(id) {
+    throw Error('No implemented.');
+  }
 }
 
 module.exports = JobOfferRepository;

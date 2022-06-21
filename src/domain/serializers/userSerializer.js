@@ -1,5 +1,6 @@
 const serializeUser = (user) => {
   if (!user) return null;
+
   const userDetails = serializeUserDetails(user.details);
   return {
     id: user.toJSON().id,
