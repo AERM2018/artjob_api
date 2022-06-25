@@ -7,6 +7,7 @@ class UserDataSource extends UserRepository {
     const user = await db.User.findOne({ where: { email } });
     return userSerializer(user);
   }
+
   async getUserById(id) {
     // Do join with the table of the user's type
     let user = await db.User.findByPk(id);
@@ -26,6 +27,10 @@ class UserDataSource extends UserRepository {
   async signUpUser(user) {
     const { id } = await db.User.create(user);
     return id;
+  }
+
+  async rateUser(rate, userIdRated) {
+    await db.User.update({ rate }, { where: { id: userIdRated } });
   }
 }
 

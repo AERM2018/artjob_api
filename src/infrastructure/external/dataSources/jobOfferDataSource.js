@@ -54,6 +54,7 @@ class JobOfferDataSource extends JobOfferRepository {
             },
             include: { model: db.User },
           });
+          applicationAccepted.User.details = await db.Artist.findOne({ user_id: applicationAccepted.User.id });
           jobOffer.application = applicationAccepted;
         }
         return serializeJobOffer(jobOffer);

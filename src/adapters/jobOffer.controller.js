@@ -1,9 +1,7 @@
-const createJobOffer = require('../domain/userCases/company/createJobOffer');
-const getJobOffers = require('../domain/userCases/company/getJobOffers');
-const getProspectsFromJobOffer = require('../domain/userCases/company/getApplicationsFromJobOffer');
 const { prepareAndSendDataResponse, HttpStatus, prepareAndSendResponse } = require('./helpers/responseHandler');
-const getApplicationsFromJobOffer = require('../domain/userCases/company/getApplicationsFromJobOffer');
-const acceptApplicationForJobOffer = require('../domain/userCases/company/acceptApplicationForJobOffer');
+const getJobOffers = require('../domain/userCases/users/company/getJobOffers');
+const getApplicationsFromJobOffer = require('../domain/userCases/users/company/getApplicationsFromJobOffer');
+const acceptApplicationForJobOffer = require('../domain/userCases/users/company/acceptApplicationForJobOffer');
 
 const jobOfferController = (jobOffersDataSource) => ({
   getJobOffers: async (req, res) => {

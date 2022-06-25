@@ -11,6 +11,9 @@ class UserRepository {
   async signUpUser(user) {
     throw Error('No implemented.');
   }
+  async rateUser(rate, userIdRated) {
+    throw Error('No implemented.');
+  }
 }
 
 module.exports = UserRepository;
