@@ -2,10 +2,19 @@ class ArtSellRepository {
   async createArtSell(artSell) {
     throw Error('No implemented.');
   }
-  async buySell(userIdBuyer) {
+  async getArtSells() {
     throw Error('No implemented.');
   }
-  async updateArtSell(artSell) {
+  async getArtSellById(id) {
+    throw Error('No implemented.');
+  }
+  async buyArtSell(artSellId, buyerUserId) {
+    throw Error('No implemented.');
+  }
+  async updateArtSell(artSellId, artSell) {
+    throw Error('No implemented.');
+  }
+  async deleteArtSell(artSellId) {
     throw Error('No implemented.');
   }
 }
