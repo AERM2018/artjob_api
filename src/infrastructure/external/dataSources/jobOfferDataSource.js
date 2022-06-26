@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const JobOfferRepository = require('../../../domain/ports/jobOfferRepository');
 const applicationSerializer = require('../../../domain/serializers/applicationSerializer');
 const jobOfferProspectSerializer = require('../../../domain/serializers/applicationSerializer');
@@ -66,6 +67,16 @@ class JobOfferDataSource extends JobOfferRepository {
     await db.Job_offers_artists.create({ artist_user_id: artistUserId, job_offer_id: jobOfferId });
   }
 
+  async deleteApplicationFromJobOffer(userId, jobOfferId) {
+    const jobOfferApplication = await db.Job_offers_artists.findOne({
+      [Op.and]: [{ artist_user_id: userId }, { job_offer_id: jobOfferId }],
+    });
+    await jobOfferApplication.destroy();
+    if (jobOfferApplication.is_hired) {
+      await db.Job_offer.update({ has_prospect_chosen: false }, { where: { id: jobOfferId } });
+    }
+  }
+
   async showApplicationsFromJobOffer(id) {
     const applications = await db.Job_offers_artists.findAll({
       where: { job_offer_id: id },
@@ -86,6 +97,23 @@ class JobOfferDataSource extends JobOfferRepository {
     await application.save();
     await db.Job_offer.update({ has_prospect_chosen: true }, { where: { id: application.job_offer_id } });
     return application.job_offer_id;
+  }
+
+  async updateJobOffer(id, jobOffer) {
+    await db.Job_offer.update(jobOffer, { where: { id } });
+  }
+
+  async deleteProspectFromJobOffer(id) {
+    await db.Job_offer.update({ has_prospect_chosen: false }, { where: { id } });
+    await db.Job_offers_artists.update(
+      { is_hired: false },
+      { where: { [Op.and]: [{ job_offer_id: id }, { is_hired: true }] } },
+    );
+  }
+
+  async deleteJobOffer(id) {
+    await db.Job_offers_artists.destroy({ where: { job_offer_id: id } });
+    await db.Job_offer.destroy({ where: { id } });
   }
 }
 

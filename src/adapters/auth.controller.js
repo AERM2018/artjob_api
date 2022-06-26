@@ -9,7 +9,13 @@ const authController = (userDataSource, companyDataSource, artistDataSource) => 
   login: async (req, res) => {
     const { email, password } = req.body;
     try {
-      const { status, error, msg, data } = await loginUser(email, password, userDataSource);
+      const { status, error, msg, data } = await loginUser(
+        email,
+        password,
+        userDataSource,
+        artistDataSource,
+        companyDataSource,
+      );
       // When a msg is not undefined it's becasuse the credentials were wrong, and data isn't send
       if (msg && status !== HttpStatus.OK) return prepareAndSendResponse(res, status, error, msg);
       // When the login is correct, send the user data and token

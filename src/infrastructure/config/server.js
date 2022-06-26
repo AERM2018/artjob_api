@@ -16,6 +16,7 @@ class Server {
   setUpMiddlewares() {
     this.app.use(cors());
     this.app.use(express.json());
+    this.app.use('/images', express.static(path.join(process.cwd(), 'src', 'domain', 'uploads')));
   }
 
   setUpRoutes() {

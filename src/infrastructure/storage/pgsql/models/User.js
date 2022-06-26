@@ -11,10 +11,9 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.hasOne(models.Company, { foreignKey: 'user_id' });
       this.hasOne(models.Artist, { foreignKey: 'user_id' });
-      this.hasMany(models.Art_sell, { foreignKey: 'seller_user_id' });
-      this.hasMany(models.Art_sell, { foreignKey: 'buyer_user_id' });
+      this.hasMany(models.Art_sell, { foreignKey: 'seller_user_id', as: 'seller' });
+      this.hasMany(models.Art_sell, { foreignKey: 'buyer_user_id', as: 'buyer' });
       this.hasMany(models.Job_offer, { foreignKey: 'company_user_id' });
-      this.hasMany(models.Art_sell, { foreignKey: 'artist_user_id' });
     }
   }
   User.init(
