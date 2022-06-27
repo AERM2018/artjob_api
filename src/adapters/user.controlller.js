@@ -1,5 +1,6 @@
 const applyToJobOffer = require('../domain/userCases/users/artist/applyToJobOffer');
 const refuseToJobOffer = require('../domain/userCases/users/artist/refuseToJobOffer');
+const uploadPortafolio = require('../domain/userCases/users/artist/uploadPortafolio');
 const buyArtSell = require('../domain/userCases/users/buyArtSell');
 const createJobOffer = require('../domain/userCases/users/company/createJobOffer');
 const deleteJobOffer = require('../domain/userCases/users/company/deleteJobOffer');
@@ -10,6 +11,7 @@ const createArtSell = require('../domain/userCases/users/createArtSell');
 const deleteArtSell = require('../domain/userCases/users/deleteArtSell');
 const rateUser = require('../domain/userCases/users/rateUser');
 const updateArtSell = require('../domain/userCases/users/updateArtSell');
+const updateUser = require('../domain/userCases/users/updateUser');
 const { prepareAndSendDataResponse, HttpStatus, prepareAndSendResponse } = require('./helpers/responseHandler');
 
 const userController = (
@@ -19,6 +21,39 @@ const userController = (
   artistDataSource,
   companyDataSource,
 ) => ({
+  // User
+  updateUser: async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const { status, data } = await updateUser(userId, req.body, userDataSource, companyDataSource, artistDataSource);
+      return prepareAndSendDataResponse(res, status, data);
+    } catch (error) {
+      return prepareAndSendResponse(res, HttpStatus.SERVER_ERROR, error);
+    }
+  },
+
+  deleteUser: async (req, res) => {
+    // FIXME: PUT THE RIGHT LOGIC
+    try {
+      const { userId } = req.params;
+      const { status, data } = await createJobOffer({ company_user_id: userId, ...req.body }, jobOffersDataSource);
+      return prepareAndSendDataResponse(res, status, data);
+    } catch (error) {
+      return prepareAndSendResponse(res, HttpStatus.SERVER_ERROR, error);
+    }
+  },
+
+  // Portafolio
+  uploadArtistPortafolio: async (req, res) => {
+    try {
+      const { userId } = req.params;
+      const { image_url } = req.body;
+      const { status, data } = await uploadPortafolio(userId, image_url, userDataSource, artistDataSource);
+      return prepareAndSendDataResponse(res, status, data);
+    } catch (error) {
+      return prepareAndSendResponse(res, HttpStatus.SERVER_ERROR, error);
+    }
+  },
   // Job offers
   createJobOffer: async (req, res) => {
     try {

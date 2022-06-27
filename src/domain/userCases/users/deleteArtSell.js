@@ -1,6 +1,6 @@
 const { HttpStatus } = require('../../../adapters/helpers/responseHandler');
 const ArtSellDataSource = require('../../../infrastructure/external/dataSources/artSellDataSource');
-const deleteArtSellImage = require('../../common/deleteArtSellImage');
+const deleteArtSellImage = require('../../common/deleteStoredImage');
 module.exports = async (artSellId, artSellDataSource = new ArtSellDataSource()) => {
   const { image_url } = await artSellDataSource.getArtSellById(artSellId);
   await artSellDataSource.deleteArtSell(artSellId);

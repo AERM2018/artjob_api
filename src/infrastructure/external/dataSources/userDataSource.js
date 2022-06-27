@@ -16,6 +16,16 @@ class UserDataSource extends UserRepository {
     return id;
   }
 
+  async updateUser(userId, user) {
+    const userDB = await db.User.findOne({ where: { id: userId } });
+    await userDB.update(user);
+    return { id: userDB.id, type: userDB.type };
+  }
+
+  async deleteUser(userId) {
+    throw Error('No implemented.');
+  }
+
   async rateUser(rate, userIdRated) {
     await db.User.update({ rate }, { where: { id: userIdRated } });
   }

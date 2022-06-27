@@ -12,6 +12,7 @@ const {
   isArtSellSold,
   isCompanyUserFromJobOffer,
   hasJobOfferProspectChosen,
+  deleteOldArtistPortafolioImage,
 } = require('../middlewares/dbValidations');
 
 const userRouter = (router) => {
@@ -22,6 +23,16 @@ const userRouter = (router) => {
     new ArtistDataSource(),
     new CompanyDataSource(),
   );
+  // User info
+  router.put('/users/:userId', [validateJWT], controller.updateUser);
+
+  // Portafolio
+  router.post(
+    '/users/:userId/portafolio',
+    [validateJWT, uploadImage.single('artist_portafolio'), deleteOldArtistPortafolioImage],
+    controller.uploadArtistPortafolio,
+  );
+
   // Job offers
   router.get('/users/:userId/job_offers', [validateJWT], controller.getJobOffersByCompany);
   router.post('/users/:userId/job_offers', [validateJWT], controller.createJobOffer);

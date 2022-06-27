@@ -13,12 +13,13 @@ module.exports = (sequelize, DataTypes) => {
   }
   Portafolio.init(
     {
+      id: { type: DataTypes.UUID, primaryKey: true, defaultValue: sequelize.literal('uuid_generate_v4()') },
       image_url: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: 'Portafolio',
-      table: 'portafolios',
+      tableName: 'portafolios',
       createdAt: 'created_at',
       updatedAt: 'updated_at',
     },

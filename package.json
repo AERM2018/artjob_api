@@ -6,6 +6,9 @@
   "author": "AERM2018 <retana.martinez.angel.eduardo@gmail.com>",
   "license": "MIT",
   "private": false,
+  "scripts":{
+	  "dev":"nodemon"
+  },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",

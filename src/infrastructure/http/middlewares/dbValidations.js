@@ -2,7 +2,8 @@ const db = require('../../storage/pgsql/models');
 const fs = require('fs');
 const path = require('path');
 const { prepareAndSendResponse, HttpStatus } = require('../../../adapters/helpers/responseHandler');
-const deleteArtSellImage = require('../../../domain/common/deleteArtSellImage');
+const deleteArtSellImage = require('../../../domain/common/deleteStoredImage');
+const deleteStoredImage = require('../../../domain/common/deleteStoredImage');
 const isSellerUserFromArtSell = async (req, res, next) => {
   try {
     const { sellerUserId, artSellId } = req.params;
@@ -25,7 +26,7 @@ const deleteOldArtSellImage = async (req, res, next) => {
   try {
     const { artSellId } = req.params;
     const { image_url } = await db.Art_sell.findByPk(artSellId);
-    deleteArtSellImage(image_url);
+    deleteStoredImage(image_url);
     next();
   } catch (error) {
     return prepareAndSendResponse(res, HttpStatus.SERVER_ERROR, error);
@@ -86,10 +87,23 @@ const hasJobOfferProspectChosen = async (req, res, next) => {
   }
 };
 
+const deleteOldArtistPortafolioImage = async (req, res, next) => {
+  try {
+    const { userId } = req.params;
+    const { portafolio_id } = await db.Artist.findOne({ where: { user_id: userId } });
+    const { image_url } = await db.Portafolio.findOne({ id: portafolio_id });
+    deleteStoredImage(image_url);
+    next();
+  } catch (error) {
+    return prepareAndSendResponse(res, HttpStatus.SERVER_ERROR, error);
+  }
+};
+
 module.exports = {
   isSellerUserFromArtSell,
   deleteOldArtSellImage,
   isArtSellSold,
   isCompanyUserFromJobOffer,
   hasJobOfferProspectChosen,
+  deleteOldArtistPortafolioImage,
 };

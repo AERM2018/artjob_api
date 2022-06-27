@@ -21,18 +21,18 @@ const serializeUser = (user) => {
 const serializeUserDetails = (details) => {
   if (!details) return null;
   let portafolioDetails;
-  if (details.portafolio) {
+  if (details.Portafolio) {
     portafolioDetails = {
-      id: portafolio.toJSON().id,
-      image_url: portafolio.toJSON().image_url,
-      created_at: user.toJSON().created_at,
-      updated_at: user.toJSON().updated_at,
+      id: details.Portafolio.toJSON().id,
+      image_url: details.Portafolio.toJSON().image_url,
+      created_at: details.Portafolio.toJSON().created_at,
+      updated_at: details.Portafolio.toJSON().updated_at,
     };
   }
   return {
     address: details.toJSON().address,
     experience: details.toJSON().experience,
-    portafolio: details.portafolio ? portafolioDetails : undefined,
+    portafolio: details.Portafolio ? portafolioDetails : undefined,
   };
 };
 

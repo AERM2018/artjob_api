@@ -5,10 +5,13 @@ class UserRepository {
   async getUserById(id) {
     throw Error('No implemented.');
   }
-  async getArtists() {
+  async signUpUser(user) {
     throw Error('No implemented.');
   }
-  async signUpUser(user) {
+  async updateUser(userId, user) {
+    throw Error('No implemented.');
+  }
+  async deleteUser(userId) {
     throw Error('No implemented.');
   }
   async rateUser(rate, userIdRated) {

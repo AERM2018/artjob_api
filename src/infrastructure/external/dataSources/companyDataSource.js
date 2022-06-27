@@ -8,6 +8,9 @@ class CompanyDataSource extends CompanyRepository {
   async getCompanyInfo(userId) {
     return await db.Company.findOne({ where: { user_id: userId } });
   }
+  async updateCompany(userId, address) {
+    await db.Company.update({ address }, { where: { user_id: userId } });
+  }
 }
 
 module.exports = CompanyDataSource;
